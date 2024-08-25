@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encriptador</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <header>
+        <div class="header">
+            <img class="header_logo" src="./imagenes/Logo.png" alt="Logo">
+        </div>
+    </header>
+
+    <main>
+        <div class="main">
+            <div class="left">
+                <textarea id="inputTexto" placeholder="Ingrese texto aquí"></textarea>
+                <div class="left_footer">
+                    <div class="info-contenedor">
+                        <img src="./imagenes/exclamacion.png" alt="Exclamación">
+                        <span class="texto-restriccion">Solo letras minúsculas y sin acentos</span>
+                    </div>
+                    <div class="left_buttons">
+                        <button id="btnEncriptar">Encriptar</button>
+                        <button id="btnDesencriptar">Desencriptar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right">
+                <img src="./imagenes/muñeco.png" alt="Muñeco">
+                <p id="outputTexto">Ningún mensaje fue encontrado</p>
+                <p>Ingresa el texto que desees encriptar o desencriptar.</p>
+                <button id="btnCopiar">Copiar</button>
+            </div>
+        </div>
+    </main>
+
+    <footer></footer>
+
+    <script>
+        // Función de encriptar
+        function encriptar() {
+            console.log("Encriptar botón clickeado"); // Verifica si la función se está llamando
+            let texto = document.getElementById("inputTexto").value.toLowerCase();
+            let textoEncriptado = texto
+                .replace(/e/g, "enter")
+                .replace(/i/g, "imes")
+                .replace(/a/g, "ai")
+                .replace(/o/g, "ober")
+                .replace(/u/g, "ufat");
+            document.getElementById("outputTexto").textContent = textoEncriptado || "Ningún mensaje fue encontrado";
+        }
+
+        // Función de desencriptar
+        function desencriptar() {
+            console.log("Desencriptar botón clickeado"); // Verifica si la función se está llamando
+            let texto = document.getElementById("inputTexto").value.toLowerCase();
+            let textoDesencriptado = texto
+                .replace(/enter/g, "e")
+                .replace(/imes/g, "i")
+                .replace(/ai/g, "a")
+                .replace(/ober/g, "o")
+                .replace(/ufat/g, "u");
+            document.getElementById("outputTexto").textContent = textoDesencriptado || "Ningún mensaje fue encontrado";
+        }
+
+        // Función de copiar al portapapeles
+        function copiar() {
+            let texto = document.getElementById("outputTexto").textContent;
+            navigator.clipboard.writeText(texto).then(() => {
+                alert("Texto copiado al portapapeles");
+            }).catch(err => {
+                alert("Error al copiar: " + err);
+            });
+        }
+
+        // Agregar eventos a los botones
+        document.getElementById("btnEncriptar").addEventListener("click", encriptar);
+        document.getElementById("btnDesencriptar").addEventListener("click", desencriptar);
+        document.getElementById("btnCopiar").addEventListener("click", copiar);
+    </script>
+</body>
+</html>
